@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Products</title>
+    <link rel="stylesheet" href="stylerrer.css">
+</head>
+<body>
+<div class="centered-container">
+<div class="main-wrapper">
+    <h1 class="title">Список задач</h1>
+
+    <div style="max-height: 320px; overflow-y: auto;">
+        <table class="product-table">
+            <thead>
+            <tr>
+                <th>Категория события</th>
+                <th>Описание</th>
+                <th>Дата</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="taskDto  : ${taskList}">
+                <td th:text="${taskDto .category.getDescription()}"></td>
+                <td th:text="${taskDto .description}"></td>
+                <td th:text="${taskDto .date}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="form-title">Добавить задачу</h2>
+
+    <form class="product-form" action="/mainPage" method="post">
+
+        <label for="category">Категория:</label>
+        <select name="category" id="category" required>
+            <option value="DOCTOR">Запись к врачу</option>
+            <option value="FRIEND">Встреча с другом</option>
+            <option value="BEAUTY">Бьюти</option>
+            <option value="EVENT">Другое событие</option>
+        </select>
+
+        <label for="description">Описание:</label>
+        <input type="text" name="description" id="description" required/>
+
+        <label for="date">Запланированная дата:</label>
+        <input type="date" name="date" id="date" required/>
+
+        <button type="submit">Добавить</button>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    </form>
+    <br/>
+
+    <form action="/logout" method="post" th:action="@{/logout}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <button type="submit">Выйти</button>
+    </form>
+
+</div>
+</div>
+</body>
+</html>

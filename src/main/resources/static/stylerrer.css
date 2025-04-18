@@ -1,0 +1,161 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('https://static.tildacdn.info/tild3734-3535-4731-b765-666666396530/-/resize/504x/welcome-2022-backgro.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: #000000;
+}
+
+/* Добавление размытия фона */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://static.tildacdn.info/tild3734-3535-4731-b765-666666396530/-/resize/504x/welcome-2022-backgro.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: blur(8px);  /* Размытие */
+    z-index: -1;
+}
+
+/* Центровка контента */
+.centered-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Основной блок — "карточка" с формой */
+.main-wrapper {
+    background-color: #ffffff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    border-radius: 16px;
+    max-width: 900px;
+    width: 100%;
+    padding: 40px 30px;
+    z-index: 1;
+}
+
+/* Заголовки */
+.title,
+.form-title {
+    text-align: center;
+    color: #111;
+    margin-bottom: 20px;
+}
+
+/* Таблица */
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.product-table th,
+.product-table td {
+    border: 1px solid #e0e0e0;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.product-table th {
+    background-color: #f0f5ff;
+    color: #000;
+}
+
+.product-table tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Настройка ширины столбцов */
+.product-table td:nth-child(1),
+.product-table th:nth-child(1) {
+    width: 20%; /* Категория — поуже */
+}
+
+.product-table td:nth-child(2),
+.product-table th:nth-child(2) {
+    width: 50%; /* Описание */
+}
+
+.product-table td:nth-child(3),
+.product-table th:nth-child(3) {
+    width: 30%; /* Дата — пошире */
+}
+
+/* Кнопка */
+button[type="submit"],
+.custom-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 13px;
+    border-radius: 50px;
+    background-color: #448AFF;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover,
+.custom-btn:hover {
+    background-color: #2979FF;
+}
+
+/* Стили формы */
+.product-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* Бургер — можно удалить, если не используешь */
+.t-menuburger {
+    position: relative;
+    flex-shrink: 0;
+    width: 28px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    transform: rotate(0deg);
+    transition: transform .5s ease-in-out;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.t-menuburger span {
+    display: block;
+    position: absolute;
+    width: 100%;
+    opacity: 1;
+    left: 0;
+    height: 2px;
+    background: #000;
+}

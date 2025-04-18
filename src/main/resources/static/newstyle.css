@@ -1,0 +1,139 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #9face6);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 40px;
+}
+
+.main-wrapper {
+    background-color: white;
+    padding: 40px 50px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 600px;
+    text-align: left;
+}
+
+.title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Таблица задач */
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    table-layout: fixed; /* фиксированное расположение для равных колонок */
+}
+
+.product-table th,
+.product-table td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 16px;
+    word-wrap: break-word; /* перенос текста */
+    overflow-wrap: break-word; /* для старых браузеров */
+    margin: 0;
+    border-spacing: 0;
+}
+
+.product-table th {
+    position: sticky;
+    top: -4px;
+    background-color: #6a82fb;
+    color: white;
+}
+
+.product-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.product-table tr:hover {
+    background-color: #e0e7ff;
+}
+
+/* Заголовок формы */
+.form-title {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+/* Форма */
+.product-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #444;
+}
+
+.product-form input,
+.product-form select {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+/* Кнопка */
+.product-form button {
+    padding: 12px;
+    background-color: #6a82fb;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.product-form button:hover {
+    background-color: #5a72e5;
+}
+
+/* Определение ширины колонок */
+.product-table th:nth-child(1),
+.product-table td:nth-child(1) {
+    width: 30%; /* Категория события */
+}
+
+.product-table th:nth-child(2),
+.product-table td:nth-child(2) {
+    width: 50%; /* Описание */
+}
+
+.product-table th:nth-child(3),
+.product-table td:nth-child(3) {
+    width: 20%; /* Дата */
+}
+
+/* Окно с вертикальной прокруткой для таблицы */
+.product-table-wrapper {
+    max-height: 300px;
+    overflow-y: auto;
+    width: 100%;
+    -ms-overflow-style: none;  /* Убирает скролл в Internet Explorer */
+    scrollbar-width: none;     /* Убирает скролл в Firefox */
+}
+
+/* Для скрытия горизонтального скролла */
+.product-table-wrapper::-webkit-scrollbar {
+    display: none;
+}
