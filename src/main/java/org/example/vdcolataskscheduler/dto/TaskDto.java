@@ -1,7 +1,6 @@
 package org.example.vdcolataskscheduler.dto;
 
 import lombok.*;
-import org.example.vdcolataskscheduler.entity.Category;
 import org.example.vdcolataskscheduler.entity.User;
 
 import java.time.LocalDate;

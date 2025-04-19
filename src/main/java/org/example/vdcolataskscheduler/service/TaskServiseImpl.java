@@ -35,7 +35,7 @@ public class TaskServiseImpl implements TaskServise {
     public List<Task> findAll(UserDto userDto) {
         User user = userRepository.findByLogin(userDto.getLogin());
         logger.info("Finding all tasks for {}", user.getLogin());
-        List<Task> tasks = user.getTaskList(); // не получаем LazyInitException из за того, что в рамках одного запроса достаем таски
+        List<Task> tasks = user.getTaskList();
         userDto.setTaskList(tasks);
 
         return userDto.getTaskList();
