@@ -1,4 +1,4 @@
-package org.example.vdcolataskscheduler.entity;
+package org.example.vdcolataskscheduler.dto;
 
 public enum Category {
     DOCTOR("Поход к доктору"),

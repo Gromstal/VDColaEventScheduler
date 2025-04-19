@@ -2,6 +2,7 @@ package org.example.vdcolataskscheduler.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.vdcolataskscheduler.dto.Category;
 
 import java.time.LocalDate;
 
@@ -17,7 +18,7 @@ public class Task {
     private Long id;
 
     @ManyToOne()
-    @JoinColumn(name = "user_id", nullable = false)  // Связь с пользователем
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Enumerated(EnumType.STRING)
