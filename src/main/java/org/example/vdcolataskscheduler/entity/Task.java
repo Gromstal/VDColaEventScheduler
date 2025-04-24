@@ -26,4 +26,7 @@ public class Task {
 
     private String description;
     private LocalDate date;
+
+    @Column(nullable = false)
+    private boolean isNotified;
 }
