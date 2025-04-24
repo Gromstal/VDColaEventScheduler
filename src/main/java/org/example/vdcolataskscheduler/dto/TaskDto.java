@@ -10,9 +10,11 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PUBLIC, force = true)
 public class TaskDto {
 
+    private Long id;
     private User user;
     private Category category;
     private String description;
     private LocalDate date;
+    private boolean isNotified;
 
 }
