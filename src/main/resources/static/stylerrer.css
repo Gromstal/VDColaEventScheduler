@@ -134,28 +134,17 @@ select {
     font-size: 14px;
 }
 
-/* Бургер — можно удалить, если не используешь */
-.t-menuburger {
-    position: relative;
-    flex-shrink: 0;
-    width: 28px;
-    height: 20px;
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    outline: none;
-    transform: rotate(0deg);
-    transition: transform .5s ease-in-out;
-    cursor: pointer;
-    z-index: 999;
+/* Добавленные стили для новых кнопок */
+.custom-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
 }
-
-.t-menuburger span {
-    display: block;
-    position: absolute;
-    width: 100%;
-    opacity: 1;
-    left: 0;
-    height: 2px;
-    background: #000;
+.custom-btn:hover {
+    background-color: #45a049;
 }
