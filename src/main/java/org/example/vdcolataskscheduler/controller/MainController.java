@@ -2,8 +2,8 @@ package org.example.vdcolataskscheduler.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.vdcolataskscheduler.dto.TaskDto;
-import org.example.vdcolataskscheduler.service.TaskServise;
-import org.example.vdcolataskscheduler.service.UserServise;
+import org.example.vdcolataskscheduler.service.TaskService;
+import org.example.vdcolataskscheduler.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,21 +14,38 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/mainPage")
 public class MainController {
 
-    private final TaskServise taskServise;
-    private final UserServise userServise;
+    private final TaskService taskService;
+    private final UserService userService;
 
 
     @GetMapping
-    public String getmainPage(Model model) {
-        model.addAttribute("taskList", taskServise.findAll(userServise.getCurrentUser()));
+    public String getMainPage(Model model) {
+        model.addAttribute("taskList", taskService.findAllTasks(userService.getCurrentUser()));
+        return "mainPage";
+    }
+
+    @GetMapping("/edit")
+    public String getEditPage(@RequestParam("id") Long id, Model model) {
+        TaskDto selectedTask = taskService.findTaskById(id);
+        model.addAttribute("taskList", taskService.findAllTasks(userService.getCurrentUser()));
+        model.addAttribute("taskDto", selectedTask);
+
         return "mainPage";
     }
 
     @PostMapping
     public String addTask(TaskDto taskDto ,Model model) {
-        taskServise.addTask(userServise.getCurrentUser(),taskDto);
+        taskService.addTask(userService.getCurrentUser(),taskDto);
 
-        model.addAttribute("taskList", taskServise.findAll(userServise.getCurrentUser()));
+        model.addAttribute("taskList", taskService.findAllTasks(userService.getCurrentUser()));
+        return "redirect:/mainPage";
+    }
+
+    @PostMapping("/edit")
+    public String updateTask(@ModelAttribute TaskDto taskDto,Model model) {
+        taskService.updateTask(taskDto);
+
+        model.addAttribute("taskList", taskService.findAllTasks(userService.getCurrentUser()));
         return "redirect:/mainPage";
     }
 }
