@@ -3,7 +3,7 @@ package org.example.vdcolataskscheduler.service;
 import lombok.RequiredArgsConstructor;
 import org.example.vdcolataskscheduler.dto.UserDto;
 import org.example.vdcolataskscheduler.entity.User;
-import org.example.vdcolataskscheduler.mapper.UserMapperMyImpl;
+import org.example.vdcolataskscheduler.mapper.UserMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserMapperMyImpl userMapperMy;
+    private final UserMapper userMapperMy;
 
     public UserDto getCurrentUser() {
         User user =(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
