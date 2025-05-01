@@ -1,6 +1,10 @@
 package org.example.vdcolataskscheduler.dto;
 
-public enum Category {
+import lombok.Getter;
+import java.io.Serializable;
+
+@Getter
+public enum Category implements Serializable {
     DOCTOR("Поход к доктору"),
     FRIEND("Встреча с другом"),
     BEAUTY("Бьюти"),
@@ -10,9 +14,5 @@ public enum Category {
 
     Category(String description) {
         this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
     }
 }

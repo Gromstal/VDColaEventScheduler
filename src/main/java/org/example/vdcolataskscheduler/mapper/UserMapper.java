@@ -5,7 +5,7 @@ import org.example.vdcolataskscheduler.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMapperMyImpl {
+public class UserMapper {
 
 
     public UserDto toDto(User user) {
