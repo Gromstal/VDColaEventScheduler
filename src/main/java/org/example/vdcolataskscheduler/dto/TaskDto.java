@@ -1,10 +1,10 @@
 package org.example.vdcolataskscheduler.dto;
 
 import lombok.*;
-import org.example.vdcolataskscheduler.entity.User;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -12,10 +12,11 @@ import java.time.LocalDate;
 public class TaskDto implements Serializable {
 
     private Long id;
-    private User user;
+    private Long userId;
     private Category category;
     private String description;
     private LocalDate date;
     private boolean isNotified;
+    private LocalDateTime createdAt;
 
 }

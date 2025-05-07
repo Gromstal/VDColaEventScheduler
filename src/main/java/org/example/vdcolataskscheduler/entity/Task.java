@@ -3,8 +3,10 @@ package org.example.vdcolataskscheduler.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.vdcolataskscheduler.dto.Category;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -29,4 +31,8 @@ public class Task {
 
     @Column(nullable = false)
     private boolean isNotified;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
 }
