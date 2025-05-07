@@ -11,11 +11,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserMapper userMapperMy;
+    private final UserMapper userMapper;
 
     public UserDto getCurrentUser() {
         User user =(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDto userDto = userMapperMy.toDto(user);
-        return userDto;
+        return userMapper.toDto(user);
     }
 }

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    List<Task> findAllByUser(User user);
+    List<Task> findAllByUser_Id(Long userId);
 
     @Query("update Task t set t.isNotified = true where t.id = :id")
     @Modifying
@@ -28,5 +28,4 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
                        @Param("category") Category category,
                        @Param("date") LocalDate date);
 
-    Task findTaskById(Long id);
 }

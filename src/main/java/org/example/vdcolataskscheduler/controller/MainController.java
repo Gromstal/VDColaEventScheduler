@@ -3,7 +3,6 @@ package org.example.vdcolataskscheduler.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.vdcolataskscheduler.dto.TaskDto;
 import org.example.vdcolataskscheduler.service.TaskService;
-import org.example.vdcolataskscheduler.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 public class MainController {
 
     private final TaskService taskService;
-    private final UserService userService;
 
 
     @GetMapping

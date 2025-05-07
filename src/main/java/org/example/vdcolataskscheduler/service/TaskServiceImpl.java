@@ -4,33 +4,31 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.vdcolataskscheduler.dto.TaskDto;
 import org.example.vdcolataskscheduler.dto.UserDto;
-import org.example.vdcolataskscheduler.entity.Task;
 import org.example.vdcolataskscheduler.mapper.TaskMapper;
 import org.example.vdcolataskscheduler.mapper.UserMapper;
+import org.example.vdcolataskscheduler.repository.RedisRepository;
 import org.example.vdcolataskscheduler.repository.TaskRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import java.time.Duration;
+
+import java.util.Comparator;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class TaskServiceImpl implements TaskService {
 
-    private static final Logger logger = LoggerFactory.getLogger(TaskServiceImpl.class);
     private final TaskRepository taskRepository;
+    private final RedisRepository redisRepository;
     private final TaskMapper taskMapper;
     private final UserMapper userMapper;
-    private final RedisTemplate<String, Object> redisTemplate;
     private final UserService userService;
+    private static final Logger logger = LoggerFactory.getLogger(TaskServiceImpl.class);
 
     public void addTask(TaskDto task) {
-        task.setUser(userMapper.toEntity(getUser()));
-        Task taskEntity = taskMapper.toEntity(task);
-        taskRepository.save(taskEntity);
-        redisTemplate.delete(getKey());
+        taskRepository.save(taskMapper.toEntity(task, userMapper.toEntity(getUser())));
+        redisRepository.delete();
         logger.info("Task added successfully");
     }
 
@@ -41,13 +39,12 @@ public class TaskServiceImpl implements TaskService {
                 task.getDescription(),
                 task.getCategory(),
                 task.getDate());
-        redisTemplate.delete(getKey());
+        redisRepository.delete();
         logger.info("Task " + task.getId() + " updated");
     }
 
     public TaskDto findTaskById(Long id) {
-
-        List<TaskDto> resultList = getTasks();
+        List<TaskDto> resultList = redisRepository.getTasks();
         if (resultList != null) {
             return resultList
                     .stream()
@@ -59,11 +56,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public List<TaskDto> findAllTasks() {
-
-        List<TaskDto> resultList = getTasks();
+        List<TaskDto> resultList = redisRepository.getTasks();
         if (resultList == null) {
-            resultList = taskMapper.toDtoList(taskRepository.findAllByUser(userMapper.toEntity(getUser())));
-            redisTemplate.opsForValue().set(getKey(), resultList, Duration.ofMinutes(10));
+            resultList = taskMapper.toDtoList(taskRepository.findAllByUser_Id(getUser().getId()));
+            redisRepository.save(resultList);
+            resultList.sort(Comparator.comparing(TaskDto::getCreatedAt));
         }
 
         logger.info("Finding all tasks for {}", getUser().getLogin());
@@ -71,16 +68,7 @@ public class TaskServiceImpl implements TaskService {
         return resultList;
     }
 
-
-    private String getKey() {
-        return "tasks:" + userService.getCurrentUser().getId();
-    }
-
-    private UserDto getUser(){
+    private UserDto getUser() {
         return userService.getCurrentUser();
-    }
-
-    private List<TaskDto> getTasks(){
-        return (List<TaskDto>) redisTemplate.opsForValue().get(getKey());
     }
 }

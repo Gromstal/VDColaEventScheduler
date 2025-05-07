@@ -26,6 +26,6 @@ public class UserDto {
     @Size(min = 5, max = 12, message = "Пароль должен содержать от 5 до 12 символов")
     private String password;
 
-    private List<Task> taskList = new ArrayList<>();
+    private List<TaskDto> taskList = new ArrayList<>();
 
 }
