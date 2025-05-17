@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate.format_sql: true
+    show-sql: true
+
+telegrambots:
+  enabled: true
+  botToken: ${TELEGRAM_BOT_TOKEN}
+  botName: ${TELEGRAM_BOT_NAME}
+  chatId: ${TELEGRAM_CHAT_ID}
+
+redis:
+  host: ${REDIS_HOST}
+  port: ${REDIS_PORT}
