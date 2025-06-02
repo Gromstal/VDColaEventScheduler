@@ -13,13 +13,6 @@
 
         <div style="max-height: 320px; overflow-y: auto;">
             <table class="product-table">
-                <thead>
-                <tr>
-                    <th>Категория события</th>
-                    <th>Описание</th>
-                    <th>Дата</th>
-                </tr>
-                </thead>
 
                 <tbody>
                 <tr th:each="taskDto : ${taskList}" th:onclick="'window.location=\'/mainPage/edit?id=' + ${taskDto.id} + '\';'">

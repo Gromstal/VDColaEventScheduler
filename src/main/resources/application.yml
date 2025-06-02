@@ -17,11 +17,3 @@ telegrambots:
   botToken: ${TELEGRAM_BOT_TOKEN}
   botName: ${TELEGRAM_BOT_NAME}
   chatId: ${TELEGRAM_CHAT_ID}
-
-redis:
-  host: ${REDIS_HOST}
-  port: ${REDIS_PORT}
-
-  logging:
-    level:
-      org.springframework.data.redis: DEBUG
