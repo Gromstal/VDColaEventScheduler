@@ -15,7 +15,7 @@ public class TaskScheduleRunner {
     private final NotificationService notificationService;
     private static final Logger log = LoggerFactory.getLogger(TaskScheduleRunner.class);
 
-    @Scheduled(cron = "0 0 8 * * ?")
+    @Scheduled(cron = "0 0 5 * * ?")
     public void sendNotify() {
         try {
             notificationService.sendNotify();

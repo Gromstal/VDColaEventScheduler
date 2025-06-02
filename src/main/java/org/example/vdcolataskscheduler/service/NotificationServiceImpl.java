@@ -29,10 +29,10 @@ public class NotificationServiceImpl implements NotificationService {
 
         for (TaskDto task : getActualTasks()) {
             try {
-                telegramBot.sendMessage("Привет! Через 3 дня наступает запланированное событие - " + task.getDescription());
+                telegramBot.sendMessage("Привет! Скоро наступает запланированное событие - " + task.getDescription());
                 logger.info("Уведомление успешно отправлено по событию id={}, description='{}'", task.getId(), task.getDescription());
-                taskRepository.updateIsNotifiedById(task.getId());
-                Thread.sleep(1000);
+                updateIsNotified(task);
+                Thread.sleep(750);
             } catch (TelegramApiException e) {
                 logger.warn("Ошибка при отправке уведомления по событию id={}", task.getId(), e);
             } catch (Exception e) {
@@ -44,7 +44,13 @@ public class NotificationServiceImpl implements NotificationService {
     private List<TaskDto> getActualTasks() {
         List<TaskDto> tasks = taskMapper.toDtoList(taskRepository.findAll());
         return tasks.stream()
-                .filter(task -> !task.isNotified() && !task.getDate().isAfter(LocalDate.now().plusDays(3)))
+                .filter(task -> !task.isNotified() && !task.getDate().isAfter(LocalDate.now().plusDays(2)))
                 .toList();
+    }
+
+    private void updateIsNotified(TaskDto task) {
+        if(task.getDate().isBefore(LocalDate.now())) {
+            taskRepository.updateIsNotifiedById(task.getId());
+        }
     }
 }
